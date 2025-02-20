@@ -1,7 +1,7 @@
 [<img src="./images/logo.png" width="400" height="200"/>](./images/logo.png)
 
-# utils
-`utils` project provides the below functionalities to a service.
+# Utils
+`Utils` project consists frequently used utilities for ECSP project and provides the below functionalities to a service.
 [![Build](https://github.com/eclipse-ecsp/utils/actions/workflows/maven-publish.yml/badge.svg)](https://github.com/eclipse-ecsp/utils/actions/workflows/maven-publish.yml)
 [![License Compliance](https://github.com/eclipse-ecsp/utils/actions/workflows/license-compliance.yml/badge.svg)](https://github.com/eclipse-ecsp/utils/actions/workflows/license-compliance.yml)
 
