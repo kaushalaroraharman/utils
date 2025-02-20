@@ -2,8 +2,8 @@
 
 # utils
 `utils` project provides the below functionalities to a service.
-[![Build](https://github.com/HARMAN-Automotive/utils/actions/workflows/maven-publish.yml/badge.svg)](https://github.com/HARMAN-Automotive/utils/actions/workflows/maven-publish.yml)
-[![License Compliance](https://github.com/Harman-Automotive/utils/actions/workflows/license-compliance.yml/badge.svg)](https://github.com/Harman-Automotive/utils/actions/workflows/license-compliance.yml)
+[![Build](https://github.com/eclipse-ecsp/utils/actions/workflows/maven-publish.yml/badge.svg)](https://github.com/eclipse-ecsp/utils/actions/workflows/maven-publish.yml)
+[![License Compliance](https://github.com/eclipse-ecsp/utils/actions/workflows/license-compliance.yml/badge.svg)](https://github.com/eclipse-ecsp/utils/actions/workflows/license-compliance.yml)
 
 1. Centralized logging.
 2. Health checks.
@@ -55,9 +55,9 @@ from the command line interface.
 Add the following dependency in the target project
 ```
 <dependency>
-  <groupId>com.harman.ignite</groupId>
-  <artifactId>ignite-utils</artifactId>
-  <version>3.X.X</version>
+  <groupId>org.eclipse.ecsp</groupId>
+  <artifactId>utils</artifactId>
+  <version>1.X.X</version>
 </dependency>
 ```
 
@@ -177,6 +177,6 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on how to raise an 
 This project is licensed under the Apache-2.0 License - see the [LICENSE](./LICENSE) file for details.
 
 ## Announcements
-All updates to this library are documented in our [Release Notes](./release_notes.txt) and [releases](https://github.com/HARMAN-Automotive/utils/releases).
-For the versions available, see the [tags on this repository](https://github.com/HARMAN-Automotive/utils/tags).
+All updates to this library are documented in our [Release Notes](./release_notes.txt) and [releases](https://github.com/eclipse-ecsp/utils/releases).
+For the versions available, see the [tags on this repository](https://github.com/eclipse-ecsp/utils/tags).
 
