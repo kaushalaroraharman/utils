@@ -82,6 +82,7 @@
         <!--Checkstyle plugin properties -->
         <checkstyle.version>10.13.0</checkstyle.version>
 		<license-tool-plugin.version>1.1.0</license-tool-plugin.version>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <maven.checkstyle.version>3.3.1</maven.checkstyle.version>
         <checkstyle.config.location>${project.basedir}/harman_checks.xml</checkstyle.config.location>
         <checkstyle.suppressions.location>${project.basedir}/checkstyle-suppressions.xml
@@ -370,14 +371,11 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
             </plugin>
-            <!-- maven sonar plugin..To send data to SonarQube you need to
-                run mvn sonar:sonar after the build -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.10.0.2594</version>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
