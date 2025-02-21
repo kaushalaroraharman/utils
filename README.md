@@ -152,14 +152,12 @@ Please read [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for details on our code o
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/AshishKmrSingh"><img src="https://github.com/AshishKmrSingh.png" width="100px;" alt="Ashish Kumar Singh"/><br /><sub><b>Ashish Kumar Singh</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors/commits?author=AshishKmrSingh" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors/pulls?q=is%3Apr+reviewed-by%3Aashishkmrsingh" title="Reviewed Pull Requests">👀</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kaushalaroraharman"><img src="https://github.com/kaushalaroraharman.png" width="100px;" alt="Kaushal Arora"/><br /><sub><b>Kaushal Arora</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors/commits?author=kaushalaroraharman" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors/pulls?q=is%3Apr+reviewed-by%3Akaushalaroraharman" title="Reviewed Pull Requests">👀</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/asimmanzoorharman"><img src="https://github.com/asimmanzoorharman.png" width="100px;" alt="Asim Manzoor"/><br /><sub><b>Asim Manzoor</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors/commits?author=asimmanzoorharman" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors/pulls?q=is%3Apr+reviewed-by%3Aasimmanzoorharman" title="Reviewed Pull Requests">👀</a></td>
+	  <td align="center" valign="top" width="14.28%"><a href="https://github.com/kaushalaroraharman"><img src="https://github.com/kaushalaroraharman.png" width="100px;" alt="Kaushal Arora"/><br /><sub><b>Kaushal Arora</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors/commits?author=kaushalaroraharman" title="Code and Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors/pulls?q=is%3Apr+reviewed-by%3Akaushalaroraharman" title="Reviewed Pull Requests">👀</a></td>
     </tr>
   </tbody>
 </table>
 
-See also the list of [contributors](https://github.com/HARMAN-Automotive/utils/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/eclipse-ecsp/utils/graphs/contributors) who participated in this project.
 
 ## Security Contact Information
 
@@ -179,4 +177,3 @@ This project is licensed under the Apache-2.0 License - see the [LICENSE](./LICE
 ## Announcements
 All updates to this library are documented in our [Release Notes](./release_notes.txt) and [releases](https://github.com/eclipse-ecsp/utils/releases).
 For the versions available, see the [tags on this repository](https://github.com/eclipse-ecsp/utils/tags).
-
