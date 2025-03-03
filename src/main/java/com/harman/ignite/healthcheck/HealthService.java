@@ -102,6 +102,7 @@ public class HealthService {
      * It accepts two parameters boolean value force and list of health-monitor to be checked for health status.
      * If force is true, it triggers a forced health check for all health monitors.
      * It returns a list of failed monitors which can be retried in case of failures.
+     * Here we are using a single gauge with multiple labels for each monitor.
      *
      * @param force if true, then it needs to trigger a forced health check
      * @param hms  list of health monitors to be checked for health status
@@ -181,6 +182,8 @@ public class HealthService {
 
     /**
      * Invoked by the scheduled executor. It wraps the retry strategy in case of failure scenario.
+     * It checks the health of all health monitors and if any monitor fails
+     * It retries the health check for the failed monitors.
      *
      * @return true if service needs to be restarted
      * @throws InterruptedException if the thread is interrupted
