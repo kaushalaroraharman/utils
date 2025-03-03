@@ -2,7 +2,7 @@
 
 # Utils
 `Utils` project consists frequently used utilities for ECSP project and provides the below functionalities to a service.
-[![Build](https://github.com/eclipse-ecsp/utils/actions/workflows/maven-build.yml/badge.svg)](https://github.com/eclipse-ecsp/utils/actions/workflows/maven-build.yml)
+[![Build And Sonar scan](https://github.com/eclipse-ecsp/utils/actions/workflows/maven-build.yml/badge.svg)](https://github.com/eclipse-ecsp/utils/actions/workflows/maven-build.yml)
 [![License Compliance](https://github.com/eclipse-ecsp/utils/actions/workflows/license-compliance.yml/badge.svg)](https://github.com/eclipse-ecsp/utils/actions/workflows/license-compliance.yml)
 [![Deployment](https://github.com/eclipse-ecsp/utils/actions/workflows/maven-deploy.yml/badge.svg)](https://github.com/eclipse-ecsp/utils/actions/workflows/maven-deploy.yml)
 
