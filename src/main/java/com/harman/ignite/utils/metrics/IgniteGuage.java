@@ -50,10 +50,16 @@ import java.util.Objects;
  */
 public abstract class IgniteGuage {
 
+    /**
+     * LOGGER.
+     */
     private static final IgniteLogger LOGGER = IgniteLoggerFactory.getLogger(IgniteGuage.class);
 
+    /**
+     * igniteGuageMetric.
+     */
     private Gauge igniteGuageMetric;
-    
+
     /**
      * Set the metric's value.
 
@@ -80,6 +86,12 @@ public abstract class IgniteGuage {
         return value;
     }
 
+    /**
+     * Create a guage metric.
+     *
+     * @param name   The name of the guage.
+     * @param labels The labels for the guage.
+     */
     protected void createGuage(String name, String... labels) {
         if (null == igniteGuageMetric) {
             synchronized (this) {
@@ -92,11 +104,21 @@ public abstract class IgniteGuage {
             LOGGER.warn("Ignite guage with name : {} and labels {}, already created", name, labels);
         }
     }
-    
-    // setter and getter for unit tests
+
+    /**
+     * This method is a getter for igniteGuageMetric.
+     *
+     * @return Gauge
+     */
     Gauge getIgniteGuageMetric() {
         return this.igniteGuageMetric;
     }
+
+    /**
+     * This method is a setter for igniteGuageMetric.
+     *
+     * @param igniteGuageMetric : Gauge
+     */
     
     void setIgniteGuageMetric(Gauge igniteGuageMetric) {
         this.igniteGuageMetric = igniteGuageMetric;

@@ -42,6 +42,14 @@ package com.harman.ignite.utils.metrics;
  * @author ssasidharan
  */
 public class GenericIgniteGauge extends AbstractIgniteGauge {
+
+    /**
+     * Constructor to create a gauge.
+     *
+     * @param name   name of the gauge
+     * @param help   help text for the gauge
+     * @param labels labels for the gauge
+     */
     public GenericIgniteGauge(String name, String help, String... labels) {
         createGauge(name, help, labels);
     }

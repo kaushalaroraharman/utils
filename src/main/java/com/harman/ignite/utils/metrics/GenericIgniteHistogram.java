@@ -37,12 +37,20 @@
 package com.harman.ignite.utils.metrics;
 
 /**
- * Histogram for Ignite.
- *
- * @author ssasidharan
+ * A class representing a generic Ignite histogram.
+ * This class extends the AbstractIgniteHistogram and provides
+ * functionality to create a histogram with specified parameters.
  */
 public class GenericIgniteHistogram extends AbstractIgniteHistogram {
 
+    /**
+     * Constructor to create histogram.
+     *
+     * @param name       Name of the histogram.
+     * @param help       Help message for the histogram.
+     * @param buckets    Buckets for the histogram.
+     * @param labelNames Label names for the histogram.
+     */
     public GenericIgniteHistogram(String name, String help, double[] buckets, String... labelNames) {
         createHistogram(name, help, buckets, labelNames);
     }

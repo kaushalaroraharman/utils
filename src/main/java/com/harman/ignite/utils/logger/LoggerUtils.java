@@ -51,8 +51,15 @@ public class LoggerUtils {
     private LoggerUtils() {
 
     }
-    
+
+    /**
+     * Regular expression to match the curly braces.
+     */
     private static final String CURLYBRACES_REGEX = "\\{\\}";
+
+    /**
+     * Pattern to match the curly braces.
+     */
     private static final Pattern CURLYBRACES_PATTERN = Pattern.compile(CURLYBRACES_REGEX);
 
     /**

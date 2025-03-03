@@ -61,6 +61,9 @@ import java.util.Map;
  */
 public class IgniteThrowableProxyConverter extends ThrowableHandlingConverter {
 
+    /**
+     * The default capacity for the builder.
+     */
     protected static final int BUILDER_CAPACITY = 2048;
 
     int lengthOption;
@@ -100,7 +103,6 @@ public class IgniteThrowableProxyConverter extends ThrowableHandlingConverter {
         super.start();
     }
 
-
     private void createLengthOption(String lengthStr) {
         if (lengthStr == null) {
             lengthOption = Integer.MAX_VALUE;
@@ -135,12 +137,22 @@ public class IgniteThrowableProxyConverter extends ThrowableHandlingConverter {
         ignoredStackTraceLines.add(ignoredStackTraceLine);
     }
 
+    /**
+     * Stops the converter and clears the evaluator list.
+     * This method is called to release any resources held by the converter.
+     */
     @Override
     public void stop() {
         evaluatorList = null;
         super.stop();
     }
 
+    /**
+     * Add extra data to the log event.
+     *
+     * @param builder the string builder
+     * @param step the stack trace element proxy
+     */
     protected void extraData(StringBuilder builder, StackTraceElementProxy step) {
         // nop
     }
@@ -180,6 +192,12 @@ public class IgniteThrowableProxyConverter extends ThrowableHandlingConverter {
         return throwableProxyToString(tp);
     }
 
+    /**
+     * Convert the throwable proxy to a string.
+     *
+     * @param tp the throwable proxy
+     * @return the string representation of the throwable proxy
+     */
     protected String throwableProxyToString(IThrowableProxy tp) {
         StringBuilder sb = new StringBuilder(BUILDER_CAPACITY);
 
@@ -217,6 +235,13 @@ public class IgniteThrowableProxyConverter extends ThrowableHandlingConverter {
         buf.append(tp.getClassName()).append(": ").append(tp.getMessage());
     }
 
+    /**
+     * Appends the stack trace elements of the given throwable proxy to the provided StringBuilder.
+     *
+     * @param buf the StringBuilder to append the stack trace elements to
+     * @param indent the indentation level for the stack trace elements
+     * @param tp the throwable proxy containing the stack trace elements
+     */
     protected void subjoinStepArray(StringBuilder buf, int indent, IThrowableProxy tp) {
         StackTraceElementProxy[] stepArray = tp.getStackTraceElementProxyArray();
         int commonFrames = tp.getCommonFrames();

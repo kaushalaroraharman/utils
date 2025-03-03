@@ -46,6 +46,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class IgniteHealthGuage extends IgniteGuage {
 
+    /**
+     * Constructor to create a guage for service health metric.
+     */
     public IgniteHealthGuage() {
         createGuage("service_health_metric", "node", "monitorname");
     }

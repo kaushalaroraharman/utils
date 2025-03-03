@@ -41,18 +41,33 @@ import com.harman.ignite.utils.logger.IgniteLoggerFactory;
 import io.prometheus.client.Counter;
 
 /**
- * Abstract class for creating prometheus counter metric.
+ * Abstract class for creating Prometheus counter metric.
  */
 public abstract class AbstractIgniteCounter {
 
+    /**
+     * Logger instance for logging.
+     */
     private static final IgniteLogger LOGGER = IgniteLoggerFactory.getLogger(AbstractIgniteCounter.class);
 
+    /**
+     * Prometheus counter instance.
+     */
     private Counter counter;
 
+    /**
+     * Flag to check if the counter is initialized.
+     */
     private boolean isInitialized;
 
+    /**
+     * Creates a Prometheus counter with the specified name, help description, and labels.
+     *
+     * @param name the name of the counter
+     * @param help the help description of the counter
+     * @param labels the labels for the counter
+     */
     protected void createCounter(String name, String help, String... labels) {
-
         if (null == counter) {
             synchronized (this) {
                 counter = Counter.build().name(name).help(help).labelNames(labels).register();
@@ -61,16 +76,16 @@ public abstract class AbstractIgniteCounter {
 
         if (null != counter) {
             isInitialized = true;
-            LOGGER.info("Created prometheus counter metric with name : {}", name);
+            LOGGER.info("Created Prometheus counter metric with name: {}", name);
         } else {
-            LOGGER.warn("Error creating prometheus counter metric with name : {}", name);
+            LOGGER.warn("Error creating Prometheus counter metric with name: {}", name);
         }
     }
 
     /**
-     * Increment the counter by 1.
+     * Increments the counter by 1.
      *
-     * @param labelValues label values
+     * @param labelValues the label values
      */
     public void inc(String... labelValues) {
         if (isInitialized) {
@@ -80,12 +95,13 @@ public abstract class AbstractIgniteCounter {
         }
     }
 
-    /** Increment the counter by the given amount.
+    /**
+     * Increments the counter by the given amount.
      *
-     * @param value       The value to increment the counter by.
-     * @param label values
+     * @param value the value to increment the counter by
+     * @param label the label values
      */
-    public void inc(double value, String ... label) {
+    public void inc(double value, String... label) {
         if (isInitialized) {
             synchronized (counter) {
                 counter.labels(label).inc(value);
@@ -93,10 +109,11 @@ public abstract class AbstractIgniteCounter {
         }
     }
 
-    /** Get the value of the counter.
+    /**
+     * Gets the value of the counter.
      *
-     * @param labelValues label values
-     * @return The value of the counter.
+     * @param labelValues the label values
+     * @return the value of the counter
      */
     public double get(String... labelValues) {
         double val = 0;
@@ -109,7 +126,7 @@ public abstract class AbstractIgniteCounter {
     }
 
     /**
-     * Remove the counter from the registry it was registered with.
+     * Removes the counter from the registry it was registered with.
      */
     public void clear() {
         if (isInitialized) {
@@ -119,13 +136,21 @@ public abstract class AbstractIgniteCounter {
         }
     }
 
-    //Below setters/getters are just for test cases
+    /**
+     * Gets the counter instance.
+     *
+     * @return the counter instance
+     */
     public Counter getCounter() {
         return this.counter;
     }
 
+    /**
+     * Checks if the counter is initialized.
+     *
+     * @return true if the counter is initialized, false otherwise
+     */
     public boolean isInitialized() {
         return isInitialized;
     }
-
 }

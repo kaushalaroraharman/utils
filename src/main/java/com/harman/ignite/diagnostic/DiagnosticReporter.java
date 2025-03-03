@@ -43,6 +43,11 @@ package com.harman.ignite.diagnostic;
  */
 public interface DiagnosticReporter {
 
+    /**
+     * This method is used to get the diagnostic data.
+     *
+     * @return the diagnostic data
+     */
     public DiagnosticData getDiagnosticData();
 
     /**

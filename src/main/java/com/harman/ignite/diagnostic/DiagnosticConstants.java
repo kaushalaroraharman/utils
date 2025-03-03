@@ -39,8 +39,19 @@ package com.harman.ignite.diagnostic;
 /** Constants for diagnostic module. */
 public class DiagnosticConstants {
 
+    /**
+     * String representation for Diagnostic.
+     */
     public static final String DIAGNOSTIC_KEYWORD = "diagnostic.";
+
+    /**
+     * Property name for Diagnostic reporter enabled flag.
+     */
     public static final String PROPERTY_DIAGNOSTIC_REPORTER_ENABLED = "property.diagnostic.reporter.enabled";
 
-    private DiagnosticConstants() {}
+    /**
+     * Instantiates a new diagnostic constants.
+     */
+    private DiagnosticConstants() {
+    }
 }

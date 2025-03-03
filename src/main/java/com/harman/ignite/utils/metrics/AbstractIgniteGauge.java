@@ -46,124 +46,156 @@ import io.prometheus.client.Gauge;
  */
 public abstract class AbstractIgniteGauge {
 
+    /**
+     * Logger instance for logging.
+     */
     private static final IgniteLogger LOGGER = IgniteLoggerFactory.getLogger(AbstractIgniteGauge.class);
 
-    private Gauge guage;
+    /**
+     * Prometheus gauge instance.
+     */
+    private Gauge gauge;
 
+    /**
+     * Flag to check if the gauge is initialized.
+     */
     private boolean isInitialized;
 
+    /**
+     * Creates a Prometheus gauge with the specified name, help description, and labels.
+     *
+     * @param name the name of the gauge
+     * @param help the help description of the gauge
+     * @param labels the labels for the gauge
+     */
     protected void createGauge(String name, String help, String... labels) {
-        if (null == guage) {
+        if (null == gauge) {
             synchronized (this) {
-                guage = Gauge.build(name, name)
+                gauge = Gauge.build(name, name)
                         .labelNames(labels)
                         .help(help)
                         .register(CollectorRegistry.defaultRegistry);
-                LOGGER.info("Created ignite guage with name : {} and labels {}", name, labels);
+                LOGGER.info("Created ignite gauge with name: {} and labels: {}", name, labels);
             }
         }
 
-        if (null != guage) {
+        if (null != gauge) {
             isInitialized = true;
-            LOGGER.info("Created prometheus gauge metric with name : {}", name);
+            LOGGER.info("Created Prometheus gauge metric with name: {}", name);
         } else {
-            LOGGER.warn("Error creating prometheus guage metric with name : {}", name);
+            LOGGER.warn("Error creating Prometheus gauge metric with name: {}", name);
         }
     }
 
-    /** Increment the gauge by 1.
+    /**
+     * Increments the gauge by 1.
      *
-     * @param labelValues label values
+     * @param labelValues the label values
      */
     public void inc(String... labelValues) {
         if (isInitialized) {
-            synchronized (guage) {
-                guage.labels(labelValues).inc();
-            }
-        }
-    }
-
-    /** Increment the gauge by the given amount.
-     *
-     * @param value       The value to increment the gauge by.
-     * @param labelValues label values
-     */
-    public void inc(double value, String... labelValues) {
-        if (isInitialized) {
-            synchronized (guage) {
-                guage.labels(labelValues).inc(value);
-            }
-        }
-    }
-
-    /** Decrement the gauge by 1.
-     *
-     * @param labelValues label values
-     */
-    public void dec(String... labelValues) {
-        if (isInitialized) {
-            synchronized (guage) {
-                guage.labels(labelValues).dec();
-            }
-        }
-    }
-
-    /** Decrement the gauge by the given amount.
-     *
-     * @param value       The value to decrement the gauge by.
-     * @param labelValues label values
-     */
-    public void dec(double value, String... labelValues) {
-        if (isInitialized) {
-            synchronized (guage) {
-                guage.labels(labelValues).dec(value);
-            }
-        }
-    }
-
-    /** Get the value of the gauge.
-     *
-     * @param labelValues label values
-     * @return The value of the gauge.
-     */
-    public double get(String... labelValues) {
-        double val = 0;
-        if (isInitialized) {
-            synchronized (guage) {
-                val = guage.labels(labelValues).get();
-            }
-        }
-        return val;
-    }
-
-    /** Set the gauge to the given value.
-     *
-     * @param value       The value to set the gauge to.
-     * @param labelValues label values
-     */
-    public void set(double value, String... labelValues) {
-        if (isInitialized) {
-            synchronized (guage) {
-                guage.labels(labelValues).set(value);
+            synchronized (gauge) {
+                gauge.labels(labelValues).inc();
             }
         }
     }
 
     /**
-     * Remove the gauge from the registry it was registered with.
+     * Increments the gauge by the given amount.
+     *
+     * @param value the value to increment the gauge by
+     * @param labelValues the label values
      */
-    public void clear() {
+    public void inc(double value, String... labelValues) {
         if (isInitialized) {
-            synchronized (guage) {
-                guage.clear();
+            synchronized (gauge) {
+                gauge.labels(labelValues).inc(value);
             }
         }
     }
 
-    Gauge getGuage() {
-        return this.guage;
+    /**
+     * Decrements the gauge by 1.
+     *
+     * @param labelValues the label values
+     */
+    public void dec(String... labelValues) {
+        if (isInitialized) {
+            synchronized (gauge) {
+                gauge.labels(labelValues).dec();
+            }
+        }
     }
 
+    /**
+     * Decrements the gauge by the given amount.
+     *
+     * @param value the value to decrement the gauge by
+     * @param labelValues the label values
+     */
+    public void dec(double value, String... labelValues) {
+        if (isInitialized) {
+            synchronized (gauge) {
+                gauge.labels(labelValues).dec(value);
+            }
+        }
+    }
+
+    /**
+     * Gets the value of the gauge.
+     *
+     * @param labelValues the label values
+     * @return the value of the gauge
+     */
+    public double get(String... labelValues) {
+        double val = 0;
+        if (isInitialized) {
+            synchronized (gauge) {
+                val = gauge.labels(labelValues).get();
+            }
+        }
+        return val;
+    }
+
+    /**
+     * Sets the gauge to the given value.
+     *
+     * @param value the value to set the gauge to
+     * @param labelValues the label values
+     */
+    public void set(double value, String... labelValues) {
+        if (isInitialized) {
+            synchronized (gauge) {
+                gauge.labels(labelValues).set(value);
+            }
+        }
+    }
+
+    /**
+     * Removes the gauge from the registry it was registered with.
+     */
+    public void clear() {
+        if (isInitialized) {
+            synchronized (gauge) {
+                gauge.clear();
+            }
+        }
+    }
+
+    /**
+     * Gets the gauge instance.
+     *
+     * @return the gauge instance
+     */
+    Gauge getGauge() {
+        return this.gauge;
+    }
+
+    /**
+     * Checks if the gauge is initialized.
+     *
+     * @return true if the gauge is initialized, false otherwise
+     */
     boolean getIsInitialized() {
         return this.isInitialized;
     }

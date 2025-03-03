@@ -38,12 +38,29 @@ package com.harman.ignite.diagnostic;
 
 /**
  * This enum is used to report the diagnostic result.
+ * It provides two possible results: PASS and FAIL, each with a corresponding value.
+ * The value can be retrieved using the {@link #getValue()} method.
+ *
+ * <p>Example usage:</p>
+ * <pre>
+ *   DiagnosticResult result = DiagnosticResult.PASS;
+ *   double value = result.getValue();
+ * </pre>
+ *
+ * @since 1.0
+ * @version 1.0
+ *
+ * @see com.harman.ignite.diagnostic.DiagnosticReporter
+ * @see com.harman.ignite.diagnostic.DiagnosticData
+ * @see com.harman.ignite.diagnostic.DiagnosticConstants
  *
  * @author avadakkootko
  */
 public enum DiagnosticResult {
+
     /**
      * Used by diagnostic metric to report success.
+     * Returns a value of 1.0.
      */
     PASS {
         @Override
@@ -53,6 +70,7 @@ public enum DiagnosticResult {
     },
     /**
      * Used by diagnostic metric to report an issue.
+     * Returns a value of 0.0.
      */
     FAIL {
         @Override
@@ -61,5 +79,10 @@ public enum DiagnosticResult {
         }
     };
 
+    /**
+     * Gets the value associated with the diagnostic result.
+     *
+     * @return the value of the diagnostic result
+     */
     public abstract double getValue();
 }

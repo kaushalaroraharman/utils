@@ -49,9 +49,24 @@ import java.util.function.Supplier;
  */
 public abstract class AbstractIgniteHistogram {
 
+    /**
+     * Timer divisor.
+     */
     private static final double TIMER_DIVISOR = 1E9D;
+
+    /**
+     * Prometheus histogram instance.
+     */
     private Histogram histogram;
 
+    /**
+     * Method to create a histogram.
+     *
+     * @param name       name of the histogram
+     * @param help       help text for the histogram
+     * @param buckets    buckets for the histogram
+     * @param labelNames labels for the histogram
+     */
     protected void createHistogram(String name, String help, double[] buckets, String... labelNames) {
         histogram = Histogram
                 .build(name, help)
@@ -60,10 +75,21 @@ public abstract class AbstractIgniteHistogram {
                 .register(CollectorRegistry.defaultRegistry);
     }
 
+    /**
+     * Start the timer.
+     *
+     * @return  IgniteTimer instance
+     */
     public IgniteTimer start() {
         return new IgniteTimer(this);
     }
 
+    /**
+     * Observe the time taken for a function to execute.
+     *
+     * @param amt   time taken
+     * @param labels    labels to be observed
+     */
     public void observe(double amt, String... labels) {
         histogram.labels(labels).observe(amt);
     }
@@ -101,12 +127,13 @@ public abstract class AbstractIgniteHistogram {
     }
 
     /**
-     * Allows exception to be thrown unlike observe(Supplier).
+     * Observe the time taken for a callable function to execute.
      *
-     * @param f function to execute
-     * @param labels    labels to be observed
-     * @return result of the function
-     * @throws Exception    the exception thrown by the function
+     * @param f       callable function to execute
+     * @param labels  labels to be observed
+     * @param <V>     type of the result
+     * @return        result of the callable function
+     * @throws Exception if the callable function throws an exception
      */
     public <V> V observeExtended(Callable<V> f, String... labels) throws Exception {
         IgniteTimer timer = start();
@@ -117,15 +144,26 @@ public abstract class AbstractIgniteHistogram {
         }
     }
 
-
-
     /**
-     * Timer for Ignite.
+     * Timer class for Ignite.
      */
     public static class IgniteTimer {
+
+        /**
+         * Timer divisor.
+         */
         private AbstractIgniteHistogram histo = null;
+
+        /**
+         * Start time.
+         */
         private long start = 0L;
 
+        /**
+         * Constructor for IgniteTimer.
+         *
+         * @param histo histogram instance
+         */
         public IgniteTimer(AbstractIgniteHistogram histo) {
             this.histo = histo;
             this.start = System.nanoTime();
@@ -144,6 +182,11 @@ public abstract class AbstractIgniteHistogram {
         }
     }
 
+    /**
+     * This method is a getter for histogram.
+     *
+     * @return Histogram
+     */
     Histogram getHistogram() {
         return histogram;
     }

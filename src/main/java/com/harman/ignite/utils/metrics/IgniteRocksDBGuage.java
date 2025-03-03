@@ -50,8 +50,15 @@ import org.springframework.stereotype.Component;
 @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 @Component
 public class IgniteRocksDBGuage extends IgniteGuage {
+
+    /**
+     * LOGGER.
+     */
     private static final IgniteLogger LOGGER = IgniteLoggerFactory.getLogger(IgniteRocksDBGuage.class);
 
+    /**
+     * Create Gauges for RocksDB metrics.
+     */
     public void setup() {
         createGuage("rocksdb_metric", "metric_name", "svc", "node");
         LOGGER.debug("rocksdb_metric guage successfully created.");

@@ -49,8 +49,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * Implementation class for IgniteLogger interface.
  * This class is used to customize log messages.
  *
- * @author AKumar
+ * <p>This class provides methods to log messages at various levels (trace, debug, info, warn, error)
+ * with support for IgniteEvent and message formatting.</p>
  *
+ * @since 1.0
+ * @version 1.0
+ *
+ * @see com.harman.ignite.entities.IgniteEvent
+ * @see org.slf4j.Logger
+ * @see org.slf4j.LoggerFactory
  */
 public class IgniteLoggerImpl implements IgniteLogger {
 
@@ -58,29 +65,49 @@ public class IgniteLoggerImpl implements IgniteLogger {
     private static final String MESSAGE = "message";
     private static Map<String, IgniteLoggerImpl> igniteLoggersMap = new ConcurrentHashMap<>();
 
+    /**
+     * Private constructor to initialize the logger for the specified class.
+     *
+     * @param clazz the class for which the logger is requested
+     */
     private IgniteLoggerImpl(Class<?> clazz) {
         PatternLayout.defaultConverterMap
-        .put("caller", com.harman.ignite.utils.logger.IgniteCallerDataConverter.class.getName());
+                .put("caller", com.harman.ignite.utils.logger.IgniteCallerDataConverter.class.getName());
         PatternLayout.defaultConverterMap
-        .put("ex", com.harman.ignite.utils.logger.IgniteThrowableProxyConverter.class.getName());
+                .put("ex", com.harman.ignite.utils.logger.IgniteThrowableProxyConverter.class.getName());
         PatternLayout.defaultConverterMap
-        .put("exception", com.harman.ignite.utils.logger.IgniteThrowableProxyConverter.class.getName());
+                .put("exception", com.harman.ignite.utils.logger.IgniteThrowableProxyConverter.class.getName());
         PatternLayout.defaultConverterMap
-        .put("throwable", com.harman.ignite.utils.logger.IgniteThrowableProxyConverter.class.getName());
+                .put("throwable", com.harman.ignite.utils.logger.IgniteThrowableProxyConverter.class.getName());
         logger = LoggerFactory.getLogger(clazz);
     }
 
+    /**
+     * Sets the logger instance.
+     *
+     * @param logger the logger instance to set
+     */
     public void setLogger(Logger logger) {
         this.logger = logger;
     }
 
+    /**
+     * Returns an instance of IgniteLogger for the specified class type.
+     *
+     * @param clazz the class for which the logger is requested
+     * @return an instance of IgniteLogger for the specified class type
+     */
     protected static IgniteLogger getIgniteLoggerInstance(Class<?> clazz) {
         igniteLoggersMap.putIfAbsent(clazz.getName(), new IgniteLoggerImpl(clazz));
         return (IgniteLogger) igniteLoggersMap.get(clazz.getName());
     }
 
-    /*
-     * Added for JUnit test purpose only.
+    /**
+     * Returns an instance of IgniteLoggerImpl for the specified class type.
+     * This method is added for JUnit test purposes only.
+     *
+     * @param clazz the class for which the logger is requested
+     * @return an instance of IgniteLoggerImpl for the specified class type
      */
     static IgniteLoggerImpl getIgniteLoggerImplInstance(Class<?> clazz) {
         igniteLoggersMap.putIfAbsent(clazz.getName(), new IgniteLoggerImpl(clazz));
@@ -298,6 +325,13 @@ public class IgniteLoggerImpl implements IgniteLogger {
         logger.error(msg, t);
     }
 
+    /**
+     * Constructs a log message with the header information from the IgniteEvent.
+     *
+     * @param event the IgniteEvent associated with the log message
+     * @param format the message format string
+     * @return the formatted log message with header information
+     */
     private String getMessageWithHeader(IgniteEvent event, String format) {
         StringBuilder formatBuilder = new StringBuilder();
         long timeStamp = event.getTimestamp();
@@ -328,8 +362,11 @@ public class IgniteLoggerImpl implements IgniteLogger {
         return formatBuilder.toString();
     }
 
-    /*
-     * Added for JUnit test purpose only.
+    /**
+     * Returns the map of IgniteLoggerImpl instances.
+     * This method is added for JUnit test purposes only.
+     *
+     * @return the map of IgniteLoggerImpl instances
      */
     Map<String, IgniteLoggerImpl> getIgniteLoggersMap() {
         return igniteLoggersMap;

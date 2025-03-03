@@ -54,10 +54,18 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * The objective of IgniteHealthMonitor is to publish the health of stream processor to prometheus.
+ * The objective of HealthService is to publish the health of stream processor to Prometheus.
  * This can also be used for readiness and liveliness probe.
  *
- * @author avadakkootko
+ * @since 1.0
+ * @version 1.0
+ *
+ * @see com.harman.ignite.healthcheck.HealthMonitor
+ * @see com.harman.ignite.utils.metrics.IgniteHealthGuage
+ * @see jakarta.annotation.PostConstruct
+ * @see org.springframework.beans.factory.annotation.Autowired
+ * @see org.springframework.beans.factory.annotation.Value
+ * @see org.springframework.stereotype.Component
  */
 @Component
 public class HealthService {
@@ -84,7 +92,6 @@ public class HealthService {
     @Value("${health.service.executor.initial.delay:300000}")
     private long initialDelay;
     private HealthServiceCallBack callback;
-    // Here we are using a single guage with multiple labels for each monitor.
     @Autowired
     private IgniteHealthGuage serviceHealthGuage;
     private ScheduledExecutorService healthServiceExecutor = null;
@@ -98,7 +105,7 @@ public class HealthService {
      *
      * @param force if true, then it needs to trigger a forced health check
      * @param hms  list of health monitors to be checked for health status
-     * @return list of failed monitors
+     * @return list of failed health monitors
      */
     protected synchronized List<HealthMonitor> checkHealthAndGetFailedMonitors(boolean force, List<HealthMonitor> hms) {
         List<HealthMonitor> failedHealthMonitors = new ArrayList<>();
@@ -179,8 +186,6 @@ public class HealthService {
      * @throws InterruptedException if the thread is interrupted
      */
     protected boolean needsRestart() throws InterruptedException {
-        // For the first health check default states of variable unHealthy will
-        // be true and force will be force.
         startedExecutor.set(true);
         boolean restart = true;
         boolean force = false;
@@ -219,8 +224,6 @@ public class HealthService {
                 if (healthMonitor.isEnabled()) {
                     String metricName = healthMonitor.metricName();
                     String monitorName = healthMonitor.monitorName();
-                    // If two monitors have metrics with same name throw
-                    // exception
                     if (metricToMonitorMapping.containsKey(metricName)) {
                         LOGGER.error("Two health monitors {} and {} cannot have same MetricName :", monitorName,
                                 metricToMonitorMapping.get(metricName), metricName);
@@ -287,6 +290,9 @@ public class HealthService {
         }
     }
 
+    /**
+     * Close the health service executor.
+     */
     protected void close() {
         if (healthServiceExecutor != null && !healthServiceExecutor.isShutdown()) {
             LOGGER.info("Shutting the SingleThreadScheduledExecutor for health service!");
@@ -295,44 +301,95 @@ public class HealthService {
         }
     }
 
+    /**
+     * Registers a callback to be invoked when the health service needs to perform a restart.
+     *
+     * @param callback the callback to register
+     */
     public void registerCallBack(HealthServiceCallBack callback) {
         this.callback = callback;
         LOGGER.info("Registered HealthService callback");
     }
 
+    /**
+     * Checks if the health service executor has started.
+     *
+     * @return true if the health service executor has started, false otherwise
+     */
     boolean isStartedExecutor() {
         return startedExecutor.get();
     }
 
+    /**
+     * Gets the list of health monitors.
+     *
+     * @return the list of health monitors
+     */
     List<HealthMonitor> getHealthMonitors() {
         return this.healthMonitors;
     }
 
     // Below are for test case support
+
+    /**
+     * Sets the list of health monitors. This method is used for testing.
+     *
+     * @param healthMonitors the list of health monitors
+     */
     void setHealthMonitors(List<HealthMonitor> healthMonitors) {
         this.healthMonitors = healthMonitors;
     }
 
+    /**
+     * Sets the node name. This method is used for testing.
+     *
+     * @param nodeName the node name
+     */
     void setNodeName(String nodeName) {
         this.nodeName = nodeName;
     }
 
+    /**
+     * Sets the failure retry threshold. This method is used for testing.
+     *
+     * @param failureRetryThreshold the failure retry threshold
+     */
     void setFailureRetryThreshold(int failureRetryThreshold) {
         this.failureRetryThreshold = failureRetryThreshold;
     }
 
+    /**
+     * Sets the failure retry interval. This method is used for testing.
+     *
+     * @param failureRetryInterval the failure retry interval
+     */
     void setFailureRetryInterval(int failureRetryInterval) {
         this.failureRetryInterval = failureRetryInterval;
     }
 
+    /**
+     * Sets the retry interval. This method is used for testing.
+     *
+     * @param retryInterval the retry interval
+     */
     void setRetryInterval(int retryInterval) {
         this.retryInterval = retryInterval;
     }
 
+    /**
+     * Sets the Prometheus gauge for service health. This method is used for testing.
+     *
+     * @param serviceHealthGuage the Prometheus gauge for service health
+     */
     void setServiceHealthGuage(IgniteHealthGuage serviceHealthGuage) {
         this.serviceHealthGuage = serviceHealthGuage;
     }
 
+    /**
+     * Gets the callback registered with the health service.
+     *
+     * @return the callback registered with the health service
+     */
     HealthServiceCallBack getCallback() {
         return this.callback;
     }
