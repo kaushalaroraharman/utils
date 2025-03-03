@@ -43,6 +43,13 @@ package com.harman.ignite.utils.metrics;
  */
 public class GenericIgniteCounter extends AbstractIgniteCounter {
 
+    /**
+     * Constructor to create a counter with the given name and help string.
+     *
+     * @param name   The name of the counter.
+     * @param help   The help string of the counter.
+     * @param labels The labels of the counter.
+     */
     public GenericIgniteCounter(String name, String help, String... labels) {
         createCounter(name, help, labels);
     }

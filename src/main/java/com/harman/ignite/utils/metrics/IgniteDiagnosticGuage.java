@@ -46,6 +46,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class IgniteDiagnosticGuage extends IgniteGuage {
 
+    /**
+     * Constructor to create a guage for diagnostic metrics.
+     */
     public IgniteDiagnosticGuage() {
         createGuage("diagnostic_metric", "node", "diagnostic_reporter_name", "diagnostic_reporter_sublabel");
     }

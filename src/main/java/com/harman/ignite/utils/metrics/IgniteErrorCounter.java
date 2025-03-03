@@ -51,14 +51,40 @@ import java.util.Optional;
 @Component
 public class IgniteErrorCounter extends GenericIgniteCounter {
 
+    /**
+     * NA.
+     */
     public static final String NA = "N/A";
+
+    /**
+     * ERROR_COUNT.
+     */
     private static final String ERROR_COUNT = "error_count";
+
+    /**
+     * NODE.
+     */
     private static final String NODE = "node";
+
+    /**
+     * ID of task.
+     */
     private static final String TASKID = "tid";
+
+    /**
+     * EXCEPTION_CLASS_NAME.
+     */
     private static final String EXCEPTION_CLASS_NAME = "ecn";
+
+    /**
+     * nodeName.
+     */
     @Value("${NODE_NAME:localhost}")
     private String nodeName;
 
+    /**
+     * Constructor.
+     */
     public IgniteErrorCounter() {
         super(ERROR_COUNT, ERROR_COUNT, NODE, TASKID, EXCEPTION_CLASS_NAME);
     }
@@ -113,6 +139,11 @@ public class IgniteErrorCounter extends GenericIgniteCounter {
         return get(nodeName, tid, exceptionClassName.getName());
     }
 
+    /**
+     * This method is a setter for nodename.
+     *
+     * @param nodeName : String
+     */
     public void setNodeName(String nodeName) {
         this.nodeName = nodeName;
     }

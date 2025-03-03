@@ -50,8 +50,16 @@ import java.util.Objects;
  */
 public abstract class IgniteCounter {
 
+
+    /**
+     * Logger instance for logging.
+     */
     private static final IgniteLogger LOGGER = IgniteLoggerFactory.getLogger(IgniteCounter.class);
     
+
+    /**
+     * Prometheus counter instance.
+     */
     private  Counter counter;
     
     /**
@@ -65,11 +73,13 @@ public abstract class IgniteCounter {
             counter.labels(labelValues).inc();
         }
     }
-    
+
     /**
      * Get the metric's value for given labels.
      *
      * @param labelValues label values
+     *
+     * @return double
      */
     public double get(String... labelValues) {
         double value = 0;
@@ -77,7 +87,13 @@ public abstract class IgniteCounter {
         value = counter.labels(labelValues).get();
         return value;
     }
-    
+
+    /**
+     * Creates a Prometheus counter with the specified name and labels.
+     *
+     * @param name the name of the counter
+     * @param labels the labels for the counter
+     */
     protected void createCounter(String name, String... labels) {
         if (null == counter) {
             synchronized (this) {
@@ -88,7 +104,12 @@ public abstract class IgniteCounter {
             LOGGER.warn("Ignite counter with name : {} and labels {}, already created", name, labels);
         }
     }
-    
+
+    /**
+     * This method is a getter for counter.
+     *
+     * @return Counter
+     */
     Counter getCounter() { 
         return this.counter;
     }

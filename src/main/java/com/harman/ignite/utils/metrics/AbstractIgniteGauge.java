@@ -42,7 +42,13 @@ import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.Gauge;
 
 /**
- * Abstract class for creating prometheus gauge metric.
+ * Abstract class for creating and managing Prometheus gauge metrics in Ignite.
+ *
+ * <p>This class provides methods to create, increment, decrement, get, set, and clear
+ * Prometheus gauge metrics. It ensures thread-safe operations on the gauge metrics.</p>
+ *
+ * @since 1.0
+ * @version 1.0
  */
 public abstract class AbstractIgniteGauge {
 
@@ -52,6 +58,13 @@ public abstract class AbstractIgniteGauge {
 
     private boolean isInitialized;
 
+    /**
+     * Creates a Prometheus gauge metric with the specified name, help description, and labels.
+     *
+     * @param name the name of the gauge metric
+     * @param help the help description of the gauge metric
+     * @param labels the labels for the gauge metric
+     */
     protected void createGauge(String name, String help, String... labels) {
         if (null == guage) {
             synchronized (this) {
@@ -71,9 +84,10 @@ public abstract class AbstractIgniteGauge {
         }
     }
 
-    /** Increment the gauge by 1.
+    /**
+     * Increments the gauge metric by 1 for the specified label values.
      *
-     * @param labelValues label values
+     * @param labelValues the label values for the gauge metric
      */
     public void inc(String... labelValues) {
         if (isInitialized) {
@@ -83,10 +97,11 @@ public abstract class AbstractIgniteGauge {
         }
     }
 
-    /** Increment the gauge by the given amount.
+    /**
+     * Increments the gauge metric by the specified value for the specified label values.
      *
-     * @param value       The value to increment the gauge by.
-     * @param labelValues label values
+     * @param value the value to increment the gauge metric by
+     * @param labelValues the label values for the gauge metric
      */
     public void inc(double value, String... labelValues) {
         if (isInitialized) {
@@ -96,9 +111,10 @@ public abstract class AbstractIgniteGauge {
         }
     }
 
-    /** Decrement the gauge by 1.
+    /**
+     * Decrements the gauge metric by 1 for the specified label values.
      *
-     * @param labelValues label values
+     * @param labelValues the label values for the gauge metric
      */
     public void dec(String... labelValues) {
         if (isInitialized) {
@@ -108,10 +124,11 @@ public abstract class AbstractIgniteGauge {
         }
     }
 
-    /** Decrement the gauge by the given amount.
+    /**
+     * Decrements the gauge metric by the specified value for the specified label values.
      *
-     * @param value       The value to decrement the gauge by.
-     * @param labelValues label values
+     * @param value the value to decrement the gauge metric by
+     * @param labelValues the label values for the gauge metric
      */
     public void dec(double value, String... labelValues) {
         if (isInitialized) {
@@ -121,10 +138,11 @@ public abstract class AbstractIgniteGauge {
         }
     }
 
-    /** Get the value of the gauge.
+    /**
+     * Returns the current value of the gauge metric for the specified label values.
      *
-     * @param labelValues label values
-     * @return The value of the gauge.
+     * @param labelValues the label values for the gauge metric
+     * @return the current value of the gauge metric
      */
     public double get(String... labelValues) {
         double val = 0;
@@ -136,10 +154,11 @@ public abstract class AbstractIgniteGauge {
         return val;
     }
 
-    /** Set the gauge to the given value.
+    /**
+     * Sets the gauge metric to the specified value for the specified label values.
      *
-     * @param value       The value to set the gauge to.
-     * @param labelValues label values
+     * @param value the value to set the gauge metric to
+     * @param labelValues the label values for the gauge metric
      */
     public void set(double value, String... labelValues) {
         if (isInitialized) {
@@ -150,7 +169,7 @@ public abstract class AbstractIgniteGauge {
     }
 
     /**
-     * Remove the gauge from the registry it was registered with.
+     * Clears the gauge metric.
      */
     public void clear() {
         if (isInitialized) {
@@ -160,10 +179,20 @@ public abstract class AbstractIgniteGauge {
         }
     }
 
+    /**
+     * Returns the gauge metric instance.
+     *
+     * @return the gauge metric instance
+     */
     Gauge getGuage() {
         return this.guage;
     }
 
+    /**
+     * Returns whether the gauge metric is initialized.
+     *
+     * @return true if the gauge metric is initialized, false otherwise
+     */
     boolean getIsInitialized() {
         return this.isInitialized;
     }

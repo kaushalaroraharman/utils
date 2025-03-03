@@ -54,13 +54,18 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class DuplicateExceptionFilter extends TurboFilter {
 
+    /**
+     * Hashmap to cache exceptions.
+     */
     private static ConcurrentHashMap<String, Long> exceptionCache = null;
 
     static {
         exceptionCache = new ConcurrentHashMap<>();
     }
 
-    // provide suppress time in milliseconds
+    /**
+     * provide suppress time in milliseconds.
+     */
     private long suppressTimeInMs = 10L * 60 * 1000;
 
     @Override
@@ -102,7 +107,6 @@ public class DuplicateExceptionFilter extends TurboFilter {
      * @param t Throwable object.
      * @return decision if a log statement would be logged-in or not.
      */
-
     private FilterReply decide(Logger logger, Throwable t) {
         FilterReply reply;
         long currTime = System.currentTimeMillis();
@@ -144,6 +148,11 @@ public class DuplicateExceptionFilter extends TurboFilter {
 
     }
 
+    /**
+     * This method is a getter for suppressTimeInMs.
+     *
+     * @return long
+     */
     public long getSuppressTimeInMs() {
         return suppressTimeInMs;
     }
@@ -160,6 +169,11 @@ public class DuplicateExceptionFilter extends TurboFilter {
         this.suppressTimeInMs = suppressTimeInMs;
     }
 
+    /**
+     * This method is a setter for exceptionCache.
+     *
+     * @param exceptionCache : ConcurrentHashMap{@code <}String{@code >}{@code <}Long{@code >}
+     */
     static void setExceptionCache(ConcurrentHashMap<String, Long> exceptionCache) {
         DuplicateExceptionFilter.exceptionCache = exceptionCache;
     }

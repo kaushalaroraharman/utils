@@ -38,34 +38,70 @@ package com.harman.ignite.healthcheck;
 
 /**
  * This class is used to store the health service state.
+ *
+ * @since 1.0
+ * @version 1.0
+ *
+ * @see java.lang.Object
  */
 public class HealthServiceState {
 
     private static final int BITS = 32;
 
+    /** The state of the health service. */
     private double state;
+
+    /** The message associated with the health service state. */
     private String message;
 
+    /**
+     * Gets the state of the health service.
+     *
+     * @return the state of the health service
+     */
     public double getState() {
         return state;
     }
 
+    /**
+     * Sets the state of the health service.
+     *
+     * @param state the state to set
+     */
     public void setState(double state) {
         this.state = state;
     }
 
+    /**
+     * Gets the message associated with the health service state.
+     *
+     * @return the message associated with the health service state
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Sets the message associated with the health service state.
+     *
+     * @param message the message to set
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * Default constructor.
+     */
     public HealthServiceState() {
-    //default constructor
+        // default constructor
     }
 
+    /**
+     * Computes the hash code for this health service state.
+     *
+     * @return the hash code for this health service state
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -77,6 +113,12 @@ public class HealthServiceState {
         return result;
     }
 
+    /**
+     * Compares this health service state to the specified object.
+     *
+     * @param obj the object to compare
+     * @return true if the objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -94,9 +136,8 @@ public class HealthServiceState {
                 return false;
             }
         } else if (!message.equals(other.message)) {
-            return false; 
+            return false;
         }
         return (Double.doubleToLongBits(state) == Double.doubleToLongBits(other.state));
     }
-
 }

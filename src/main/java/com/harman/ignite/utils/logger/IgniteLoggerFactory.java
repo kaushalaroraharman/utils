@@ -39,13 +39,28 @@ package com.harman.ignite.utils.logger;
 /**
  * Factory class which gives a logger instance for the requested type.
  *
- * @author AKumar
+ * <p>This class provides a static method to obtain an instance of {@link IgniteLogger}
+ * for a specified class type. It uses the {@link IgniteLoggerImpl} to create the logger instance.</p>
+ *
+ * @since 1.0
+ * @version 1.0
+ *
  */
 public class IgniteLoggerFactory {
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private IgniteLoggerFactory() {
     }
-    
+
+    /**
+     * Returns an instance of {@link IgniteLogger} for the specified class type.
+     *
+     * @param <T> the type of the class for which the logger is requested
+     * @param clazz the class for which the logger is requested
+     * @return an instance of {@link IgniteLogger} for the specified class type
+     */
     public static <T> IgniteLogger getLogger(Class<T> clazz) {
         return IgniteLoggerImpl.getIgniteLoggerInstance(clazz);
     }

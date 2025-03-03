@@ -59,11 +59,33 @@ import java.util.List;
  */
 public class IgniteCallerDataConverter extends CallerDataConverter {
 
+
+    /**
+     * Variable to track the start of depth.
+     */
     private int depthStart = 1;
+
+    /**
+     * Maximum error count before logging stops.
+     */
     static final int MAX_ERR_COUNT = 4;
+
+    /**
+     * Variable to track count of error.
+     */
     private int errCount = 0;
+
+    /**
+     * List of event evaluators.
+     */
     List<EventEvaluator<ILoggingEvent>> eventEvaluatorList = null;
 
+    /**
+     * Converts the logging event to a string representation.
+     *
+     * @param logEvent : the logging event
+     * @return the string representation of the logging event
+     */
     @Override
     public String convert(ILoggingEvent logEvent) {
         if (eventEvaluatorList != null) {
@@ -86,6 +108,12 @@ public class IgniteCallerDataConverter extends CallerDataConverter {
         return convertToCallerData(logEvent);
     }
 
+    /**
+     * Converts the logging event to caller data.
+     *
+     * @param le : the logging event
+     * @return the caller data as a string
+     */
     private String convertToCallerData(ILoggingEvent le) {
         StringBuilder buf = new StringBuilder();
         StackTraceElement[] cda = le.getCallerData();
@@ -100,11 +128,24 @@ public class IgniteCallerDataConverter extends CallerDataConverter {
         }
     }
 
+    /**
+     * This method is a getter for callerLinePrefix.
+     *
+     * @return String
+     */
     @Override
     protected String getCallerLinePrefix() {
         return "";
     }
 
+    /**
+     * Checks if the event evaluator can process the logging event.
+     *
+     * @param logEvent : the logging event
+     * @param eventEvaluator : the event evaluator
+     *
+     * @return true if the event evaluator can process the logging event, false otherwise
+     */
     private boolean canEvaluatorProcessLogEvent(ILoggingEvent logEvent, EventEvaluator<ILoggingEvent> eventEvaluator) {
         try {
             if (eventEvaluator.evaluate(logEvent)) {
@@ -117,6 +158,12 @@ public class IgniteCallerDataConverter extends CallerDataConverter {
         return false;
     }
 
+    /**
+     * Processes the error count and logs errors if necessary.
+     *
+     * @param ee : the event evaluator
+     * @param eex : the evaluation exception
+     */
     private void processErrorCount(EventEvaluator<ILoggingEvent> ee, EvaluationException eex) {
         if (errCount < MAX_ERR_COUNT) {
             addError("Exception thrown for evaluator named [" + ee.getName() + "]", eex);

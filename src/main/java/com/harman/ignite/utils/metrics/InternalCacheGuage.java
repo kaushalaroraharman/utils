@@ -45,23 +45,32 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 /**
- * Guage for internal cache(s) metric.
+ * Gauge for internal cache(s) metric.
  *
  * @author hbadshah
  */
 @Component
 public class InternalCacheGuage extends IgniteGuage {
 
+    /**
+     * LOGGER.
+     */
     private static final IgniteLogger LOGGER = IgniteLoggerFactory.getLogger(InternalCacheGuage.class);
 
+    /**
+     * Flag to enable internal metrics.
+     */
     @Value("${internal.metrics.enabled:false}")
     private boolean internalMetricsEnabled;
 
+    /**
+     * Flag to enable prometheus metrics.
+     */
     @Value("${metrics.prometheus.enabled:true}")
     private boolean prometheusEnabled;
 
     /**
-     * Setup the guage metric for internal cache.
+     * Set up the gauge metric for internal cache.
      */
     @PostConstruct
     public void setup() {
@@ -71,6 +80,12 @@ public class InternalCacheGuage extends IgniteGuage {
         }
     }
 
+    /**
+     * Method to set metrics with given value against the given label.
+     *
+     * @param value : double
+     * @param labels : String
+     */
     @Override
     public void set(double value, String... labels) {
         if (prometheusEnabled && internalMetricsEnabled) {
