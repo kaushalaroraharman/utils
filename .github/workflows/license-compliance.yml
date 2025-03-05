@@ -34,11 +34,11 @@ jobs:
 
       - name: Build with Maven and check dependencies with dash
         run: |
-          mvn --batch-mode --update-snapshots verify -P dash
+          mvn -X --batch-mode --update-snapshots verify -P dash
           
       - name: Ensure DEPENDENCIES file is reflecting the current state
         run: |
-          mvn org.eclipse.dash:license-tool-plugin:license-check -Ddash.summary=DEPENDENCIES-gen -P dash
+          mvn -X org.eclipse.dash:license-tool-plugin:license-check -Ddash.summary=DEPENDENCIES-gen -P dash
           diff DEPENDENCIES DEPENDENCIES-gen
           
       - name: upload results
