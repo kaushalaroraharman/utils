@@ -49,7 +49,7 @@ jobs:
         with:
           add-paths: |
             DEPENDENCIES
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ECSP_BOT_PAT }}
           branch: chore/update-DEPENDENCIES
           commit-message: "chore(dependencies): Update DEPENDENCIES"
           delete-branch: true
