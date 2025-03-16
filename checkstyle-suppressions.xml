@@ -6,8 +6,6 @@
 
 <suppressions>
     <suppress checks="AbbreviationAsWordInName|MemberName|ParameterName|ConstantName"/>
-    <suppress checks="PackageName" files="com.harman.ignite.domain.remoteInhibit" />
+    <suppress checks="PackageName" files="org.eclipse.ecsp.domain.remoteInhibit" />
     <suppress checks="TypeName" files=".*\.java"/>
-    <suppress checks="CyclomaticComplexity" files="com.harman.ignite.ro.processor.strategy.impl.AbstractStreamProcessor.java"/>
-    <suppress checks="MethodLength" files="com.harman.ignite.ro.processor.(strategy.impl.AbstractStreamProcessor|ROStreamProcessorUnitTest).java"/>
 </suppressions>

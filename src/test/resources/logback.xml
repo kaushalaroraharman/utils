@@ -37,7 +37,7 @@
 <configuration scan="true" scanPeriod="60 seconds">
 
     <turboFilter
-            class="com.harman.ignite.utils.filter.DuplicateExceptionFilter">
+            class="org.eclipse.ecsp.utils.filter.DuplicateExceptionFilter">
         <suppressTimeInMS>60000</suppressTimeInMS>
     </turboFilter>
 
@@ -61,7 +61,7 @@
         <appender-ref ref="STDOUT"/>
     </appender>
 
-    <logger name="com.harman" level="DEBUG"
+    <logger name="org.eclipse.ecsp" level="DEBUG"
             additivity="false">
         <appender-ref ref="ASYNC-STDOUT"/>
     </logger>
