@@ -50,9 +50,9 @@ package org.eclipse.ecsp.diagnostic;
  * @since 1.0
  * @version 1.0
  *
- * @see DiagnosticReporter
- * @see DiagnosticData
- * @see DiagnosticConstants
+ * @see org.eclipse.ecsp.diagnostic.DiagnosticReporter
+ * @see org.eclipse.ecsp.diagnostic.DiagnosticData
+ * @see org.eclipse.ecsp.diagnostic.DiagnosticConstants
  *
  * @author avadakkootko
  */

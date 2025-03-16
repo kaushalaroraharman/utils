@@ -72,13 +72,15 @@ public class IgniteLoggerImpl implements IgniteLogger {
      */
     private IgniteLoggerImpl(Class<?> clazz) {
         PatternLayout.defaultConverterMap
-                .put("caller", IgniteCallerDataConverter.class.getName());
+                .put("caller", org.eclipse.ecsp.utils.logger.IgniteCallerDataConverter.class.getName());
         PatternLayout.defaultConverterMap
-                .put("ex", IgniteThrowableProxyConverter.class.getName());
+                .put("ex", org.eclipse.ecsp.utils.logger.IgniteThrowableProxyConverter.class.getName());
         PatternLayout.defaultConverterMap
-                .put("exception", IgniteThrowableProxyConverter.class.getName());
+                .put("exception",
+                        org.eclipse.ecsp.utils.logger.IgniteThrowableProxyConverter.class.getName());
         PatternLayout.defaultConverterMap
-                .put("throwable", IgniteThrowableProxyConverter.class.getName());
+                .put("throwable",
+                        org.eclipse.ecsp.utils.logger.IgniteThrowableProxyConverter.class.getName());
         logger = LoggerFactory.getLogger(clazz);
     }
 

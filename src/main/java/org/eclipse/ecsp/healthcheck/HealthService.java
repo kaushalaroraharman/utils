@@ -60,8 +60,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @since 1.0
  * @version 1.0
  *
- * @see HealthMonitor
- * @see IgniteHealthGuage
+ * @see org.eclipse.ecsp.healthcheck.HealthMonitor
+ * @see org.eclipse.ecsp.utils.metrics.IgniteHealthGuage
  * @see jakarta.annotation.PostConstruct
  * @see org.springframework.beans.factory.annotation.Autowired
  * @see org.springframework.beans.factory.annotation.Value

@@ -63,9 +63,9 @@ import java.util.stream.StreamSupport;
  * @since 1.0
  * @version 1.0
  *
- * @see DiagnosticReporter
- * @see DiagnosticData
- * @see DiagnosticResult
+ * @see org.eclipse.ecsp.diagnostic.DiagnosticReporter
+ * @see org.eclipse.ecsp.diagnostic.DiagnosticData
+ * @see org.eclipse.ecsp.diagnostic.DiagnosticResult
  * @see org.springframework.beans.factory.annotation.Autowired
  * @see org.springframework.beans.factory.annotation.Value
  * @see org.springframework.stereotype.Component

@@ -77,7 +77,7 @@ public class DuplicateExceptionFilter extends TurboFilter {
      * This method is invoked in deciding if log statement would be logged or not.
      * The filter is configured in logback.xml, where we are providing "suppressTimeInMs" like below:
      * <br><br>
-     * &lt;turboFilter class="com.harman.filter.utils.ecsp.DuplicateExceptionFilter"&gt;<br>
+     * &lt;turboFilter class="org.eclipse.ecsp.utils.filter.DuplicateExceptionFilter"&gt;<br>
      * &nbsp;&nbsp;&lt;suppressTimeInMs&gt;60000&lt;/suppressTimeInMs&gt;<br>
      * &lt;/turboFilter>&gt;
      *
@@ -159,7 +159,7 @@ public class DuplicateExceptionFilter extends TurboFilter {
 
     /**
      * The value of suppressTimeInMs will be taken from logback.xml. Refer below for an example:
-     * &lt;turboFilter class="com.harman.filter.utils.ecsp.DuplicateExceptionFilter"&gt;<br>
+     * &lt;turboFilter class="org.eclipse.ecsp.utils.filter.DuplicateExceptionFilter"&gt;<br>
      * &nbsp;&nbsp;&lt;suppressTimeInMs&gt;60000&lt;/suppressTimeInMs&gt;<br>
      * &lt;/turboFilter&gt;
      *

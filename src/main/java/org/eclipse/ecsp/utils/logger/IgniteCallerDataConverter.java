@@ -52,7 +52,7 @@ import java.util.List;
  * Customizations include:<br>
  * 1. removing of "caller" from log message.<br>
  * 2. Printing short-form of fully qualified package <br>
- * name(eg:com.harman.logger.utils.ecsp.IgniteCallerDataConverter
+ * name(eg:org.eclipse.ecsp.utils.logger.IgniteCallerDataConverter
  * will be replaced as c.h.i.u.l.IgniteCallerDataConverter)
  *
  * @author vishnu.k;
