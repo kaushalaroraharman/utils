@@ -37,7 +37,6 @@
 package org.eclipse.ecsp.diagnostic;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,14 +56,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
         locations = {"classpath:property-diagnostic-test.properties", "classpath:property-diagnostic-test-2.properties"}
 )
 public class PropertyDiagnosticReporterTest {
+
     @Autowired
     @Qualifier("propertyDiagnostic")
     DiagnosticReporter propertyDiagnosticReporterImpl;
-
-    @Before
-    public void setUp() {
-
-    }
 
     @Test
     public void testDiagnosticReporterName() {
