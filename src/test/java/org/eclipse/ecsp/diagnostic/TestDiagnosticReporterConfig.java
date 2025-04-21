@@ -36,7 +36,6 @@
 
 package org.eclipse.ecsp.diagnostic;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -48,9 +47,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = { "org.eclipse.ecsp" })
 public class TestDiagnosticReporterConfig {
-
-    @Bean
-    public PropertyDiagnosticReporterTest testPropertyDiagnosticReporter() {
-        return new PropertyDiagnosticReporterTest();
-    }
+    // Configuration class for test
 }
